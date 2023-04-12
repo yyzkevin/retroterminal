@@ -33,6 +33,11 @@
   font-family: sans-serif;
 }
 
+canvas {
+	margin: 0 auto !important;
+}
+
+
 body {
   margin:0;
   padding:0;
