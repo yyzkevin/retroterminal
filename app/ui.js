@@ -1011,7 +1011,7 @@ const UI = {
     },
 
     connect2(event, password) {
-
+	console.log("connecting");
         // Ignore when rfb already exists
         if (typeof UI.rfb !== 'undefined') {
             return;

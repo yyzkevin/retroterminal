@@ -773,10 +773,11 @@ export default class RFB extends EventTargetMixin {
     }
 
     _updateScale() {
-        if (!this._scaleViewport) {
+    if (!this._scaleViewport) {
             this._display.scale = 1.0;
         } else {
             const size = this._screenSize();
+            size.h=1000;//this is a hack to deal with the div starting as height 0.
             this._display.autoscale(size.w, size.h);
         }
         this._fixScrollbars();

@@ -335,6 +335,42 @@
             autocomplete="off" spellcheck="false" tabindex="-1"></textarea>
     </div>
 
+<style>
+.keypad-buttons {
+	border: 1px solid #000000;
+	padding: 8px;
+	margin: 5px;
+	background: white;
+        -webkit-touch-callout: none; /* Safari */
+        -webkit-user-select: none; /* Chrome */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none;
+}
+
+
+:root:not(.noVNC_connected) #keypad {
+  display: none;
+}
+@media not all and (any-pointer: coarse) {
+  :root.noVNC_connected #keypad {
+    display: none;
+  }
+}
+
+</style>
+	<div id="keypad">
+		<i id="keypad_esc" class="keypad-buttons">ESC</i>
+		<i id="keypad_ctrl" class="keypad-buttons">CTRL</i>
+		<i id="keypad_alt" class="keypad-buttons">ALT</i>
+		<i id="keypad_left" class="keypad-buttons fa fa-arrow-left fa-3"></i>
+		<i id="keypad_right" class="keypad-buttons fa fa-arrow-right fa-3"></i>
+		<i id="keypad_up" class="keypad-buttons fa fa-arrow-up fa-3"></i>
+		<i id="keypad_down" class="keypad-buttons fa fa-arrow-down fa-3"></i>
+		<i id="keypad_showkb" class="keypad-buttons fa fa-keyboard-o fa-3"></i>
+	</div>
+
+
     <audio id="noVNC_bell">
         <source src="app/sounds/bell.oga" type="audio/ogg">
         <source src="app/sounds/bell.mp3" type="audio/mpeg">
