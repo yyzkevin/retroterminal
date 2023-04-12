@@ -303,8 +303,16 @@ const UI = {
             .addEventListener('click', UI.sendEsc);
         document.getElementById("noVNC_send_ctrl_alt_del_button")
             .addEventListener('click', UI.sendCtrlAltDel);
-    },
 
+
+    document.querySelectorAll('.keypad-buttons').forEach(element => {
+	element.addEventListener('touchstart', UI.myKeyDown);
+	element.addEventListener('touchend', UI.myKeyUp);
+    });
+    document.getElementById('keypad_showkb').addEventListener('click', UI.toggleVirtualKeyboard);
+
+
+    },
     addMachineHandlers() {
         document.getElementById("noVNC_shutdown_button")
             .addEventListener('click', () => UI.rfb.machineShutdown());
@@ -1646,7 +1654,31 @@ const UI = {
             btn.classList.add("noVNC_selected");
         }
     },
-
+    myKey(e,x) {
+	if(!UI.connected) return;
+	switch(e.target.getAttribute('id')) {
+		case "keypad_up":
+			UI.sendKey(KeyTable.XK_UP,"ArrowUp",x);
+			break;
+		case "keypad_down":
+			UI.sendKey(KeyTable.XK_DOWN,"ArrowDown",x);
+			break;
+		case "keypad_left":
+			UI.sendKey(KeyTable.XK_LEFT,"ArrowLeft",x);
+			break;
+		case "keypad_right":
+			UI.sendKey(KeyTable.XK_RIGHT,"ArrowRight",x);
+			break;
+                default:
+			console.log(e.target.getAttribute('id'));
+	}
+    },
+    myKeyDown(e) {
+        UI.myKey(e,true);
+    },
+    myKeyUp(e) {
+        UI.myKey(e,false);
+    },
     sendCtrlAltDel() {
         UI.rfb.sendCtrlAltDel();
         // See below
