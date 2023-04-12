@@ -174,7 +174,7 @@ const UI = {
         UI.initSetting('port', port);
         UI.initSetting('encrypt', (window.location.protocol === "https:"));
         UI.initSetting('view_clip', false);
-        UI.initSetting('resize', 'off');
+        UI.initSetting('resize', 'scale');//off
         UI.initSetting('quality', 6);
         UI.initSetting('compression', 2);
         UI.initSetting('shared', true);
@@ -999,33 +999,25 @@ const UI = {
             .classList.remove("noVNC_open");
     },
 
-    connect(event, password) {
+    connect(event,password) {
+	UI.hideStatus();
+        UI.closeConnectPanel();
+        UI.updateVisualState('connecting');
+
+        $.post("/terminal/slot.php",function(data) {
+                window.creds = data;
+                UI.connect2();
+        },"json");
+    },
+
+    connect2(event, password) {
 
         // Ignore when rfb already exists
         if (typeof UI.rfb !== 'undefined') {
             return;
         }
 
-        const host = UI.getSetting('host');
-        const port = UI.getSetting('port');
-        const path = UI.getSetting('path');
-
-        if (typeof password === 'undefined') {
-            password = WebUtil.getConfigVar('password');
-            UI.reconnectPassword = password;
-        }
-
-        if (password === null) {
-            password = undefined;
-        }
-
         UI.hideStatus();
-
-        if (!host) {
-            Log.Error("Can't connect when host is: " + host);
-            UI.showStatus(_("Must set host"), 'error');
-            return;
-        }
 
         UI.closeConnectPanel();
 
@@ -1033,13 +1025,9 @@ const UI = {
 
         let url;
 
-        url = UI.getSetting('encrypt') ? 'wss' : 'ws';
+	url = window.creds.url;
+        password = window.creds.pass;
 
-        url += '://' + host;
-        if (port) {
-            url += ':' + port;
-        }
-        url += '/' + path;
 
         UI.rfb = new RFB(document.getElementById('noVNC_container'), url,
                          { shared: UI.getSetting('shared'),
