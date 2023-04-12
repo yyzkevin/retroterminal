@@ -236,6 +236,8 @@ html {
 }
 
 #noVNC_control_bar {
+  display: none;
+
   position: relative;
   left: -100%;
 
@@ -885,6 +887,7 @@ html {
 }
 
 .noVNC_logo {
+  display: none;
   color:yellow;
   font-family: 'Orbitron', 'OrbitronTTF', sans-serif;
   line-height: 0.9;
