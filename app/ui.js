@@ -308,7 +308,10 @@ const UI = {
     document.querySelectorAll('.keypad-buttons').forEach(element => {
 	element.addEventListener('touchstart', UI.myKeyDown);
 	element.addEventListener('touchend', UI.myKeyUp);
+//	element.addEventListener('mousedown', UI.myKeyDown);
+//	element.addEventListener('mouseup', UI.myKeyUp);
     });
+    document.getElementById('keypad_audio').addEventListener('click', UI.toggleAudio);
     document.getElementById('keypad_showkb').addEventListener('click', UI.toggleVirtualKeyboard);
 
 
@@ -1513,7 +1516,6 @@ const UI = {
 
     keyEvent(keysym, code, down) {
         if (!UI.rfb) return;
-
         UI.rfb.sendKey(keysym, code, down);
     },
 
@@ -1654,6 +1656,17 @@ const UI = {
             btn.classList.add("noVNC_selected");
         }
     },
+    toggleAudio() {
+	if($("#keypad_audio").hasClass("keypad-selected")) {
+		$("#keypad_audio").removeClass("keypad-selected");
+		audio_stop();
+	}
+	else {
+		$("#keypad_audio").addClass("keypad-selected");
+		audio_start(window.creds.audio);
+	}
+	UI.checkFocus();
+    },
     myKey(e,x) {
 	if(!UI.connected) return;
 	switch(e.target.getAttribute('id')) {
@@ -1710,7 +1723,14 @@ const UI = {
         UI.rfb.focus();
         UI.idleControlbar();
     },
-
+    checkFocus() {
+        if (document.getElementById('noVNC_keyboard_button')
+            .classList.contains("noVNC_selected")) {
+            document.getElementById('noVNC_keyboardinput').focus();
+        } else {
+            UI.rfb.focus();
+        }
+    },
     sendKey(keysym, code, down) {
         UI.rfb.sendKey(keysym, code, down);
 

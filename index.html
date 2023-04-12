@@ -13,9 +13,9 @@
     or the fragment:
         http://example.com/#host=HOST&port=PORT&encrypt=1
     -->
-    <title>noVNC</title>
+    <title>Retro Terminal</title>
 
-    <link rel="icon" type="image/x-icon" href="app/images/icons/novnc.ico">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
     <!-- Apple iOS Safari settings -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -353,29 +353,40 @@
 	background-color: green;
 }
 
+.keypad {
+	display: inline;
+}
+.keypad_all {
+	display: inline;
+}
 
 
-:root:not(.noVNC_connected) #keypad {
+
+:root:not(.noVNC_connected) #keypad{
+  display: none;
+}
+:root:not(.noVNC_connected) #keypad_all{
   display: none;
 }
 @media not all and (any-pointer: coarse) {
-  :root.noVNC_connected #keypad {
+  :root.noVNC_connected .mobile_only {
     display: none;
   }
 }
 
 </style>
 	<div id="keypad">
-		<i id="keypad_esc" class="keypad-buttons">ESC</i>
-		<i id="keypad_ctrl" class="keypad-buttons">CTRL</i>
-		<i id="keypad_alt" class="keypad-buttons">ALT</i>
-		<i id="keypad_left" class="keypad-buttons fa fa-arrow-left fa-3"></i>
-		<i id="keypad_right" class="keypad-buttons fa fa-arrow-right fa-3"></i>
-		<i id="keypad_up" class="keypad-buttons fa fa-arrow-up fa-3"></i>
-		<i id="keypad_down" class="keypad-buttons fa fa-arrow-down fa-3"></i>
-		<i id="keypad_showkb" class="keypad-buttons fa fa-keyboard-o fa-3"></i>
+		<i id="keypad_esc" class="mobile_only keypad-buttons">ESC</i>
+		<i id="keypad_ctrl" class="mobile_only keypad-buttons">CTRL</i>
+		<i id="keypad_alt" class="mobile_only keypad-buttons">ALT</i>
+		<i id="keypad_left" class="mobile_only keypad-buttons fa fa-arrow-left fa-3"></i>
+		<i id="keypad_right" class="mobile_only keypad-buttons fa fa-arrow-right fa-3"></i>
+		<i id="keypad_up" class="mobile_only keypad-buttons fa fa-arrow-up fa-3"></i>
+		<i id="keypad_down" class="mobile_only keypad-buttons fa fa-arrow-down fa-3"></i>
+		<i id="keypad_showkb" class="mobile_only keypad-buttons fa fa-keyboard-o fa-3"></i>
+		<i id="keypad_audio" class="keypad-buttons fa fa-volume-off fa-3"></i>
 	</div>
-		<i id="keypad_audio" class="keypad-buttons fa fa-volume-off fa-3" onClick="start_playback(window.creds.audio)"></i>
+
 
 
     <audio id="noVNC_bell">
