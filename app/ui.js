@@ -1657,6 +1657,31 @@ const UI = {
     myKey(e,x) {
 	if(!UI.connected) return;
 	switch(e.target.getAttribute('id')) {
+		case "keypad_alt":
+			if(x) break;
+			if($("#keypad_alt").hasClass("keypad-selected")) {
+				UI.sendKey(KeyTable.XK_Alt_L, "AltLeft", false);
+				$("#keypad_alt").removeClass("keypad-selected");
+			}
+			else {
+				$("#keypad_alt").addClass("keypad-selected");
+				UI.sendKey(KeyTable.XK_Alt_L, "AltLeft", true);
+			}
+			break;
+		case "keypad_ctrl":
+			if(x) break;
+			if($("#keypad_ctrl").hasClass("keypad-selected")) {
+				UI.sendKey(KeyTable.XK_Control_L, "ControlLeft", false);
+				$("#keypad_ctrl").removeClass("keypad-selected");
+			}
+			else {
+				$("#keypad_ctrl").addClass("keypad-selected");
+				UI.sendKey(KeyTable.XK_Control_L, "ControlLeft", true);
+			}
+			break;
+		case "keypad_esc":
+		        UI.sendKey(KeyTable.XK_Escape, "Escape",x);
+			break;
 		case "keypad_up":
 			UI.sendKey(KeyTable.XK_UP,"ArrowUp",x);
 			break;

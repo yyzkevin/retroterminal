@@ -45,6 +45,7 @@
     <link rel="preload" as="image" href="app/images/error.svg">
     <link rel="preload" as="image" href="app/images/warning.svg">
     <script src="jquery-3.6.1.min.js"></script>
+    <script src="pcm-player.js"></script>
 
     <script type="module" crossorigin="anonymous" src="app/error-handler.js"></script>
     <script type="module" crossorigin="anonymous" src="app/ui.js"></script>
@@ -347,6 +348,10 @@
         -ms-user-select: none; /* Internet Explorer/Edge */
         user-select: none;
 }
+.keypad-selected {
+	background-color: green;
+}
+
 
 
 :root:not(.noVNC_connected) #keypad {
@@ -369,6 +374,7 @@
 		<i id="keypad_down" class="keypad-buttons fa fa-arrow-down fa-3"></i>
 		<i id="keypad_showkb" class="keypad-buttons fa fa-keyboard-o fa-3"></i>
 	</div>
+		<i id="keypad_audio" class="keypad-buttons fa fa-volume-off fa-3"></i>
 
 
     <audio id="noVNC_bell">
